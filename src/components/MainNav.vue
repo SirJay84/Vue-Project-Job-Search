@@ -20,19 +20,30 @@
             </li>
           </ul>
         </nav>
+        <div class="flex items-center h-full ml-auto">
+          <profile-image v-if="isLoggedIn" data-test="login-button"/>
+          <action-button v-else data-test="profile-image"/>
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "@/components/ActionButton.vue";
+import ProfileImage from "@/components/ProfileImage.vue";
 export default {
   name: "MainNav",
+  components: {
+    ActionButton,
+    ProfileImage,
+  },
   data() {
     return {
       company: "SirJay Careers",
       url:"https://careers.google.com",
-      menuItems: ["Teams", "Locations", "Life at SirJay Corp", "How we hire", "Students", "Jobs"]
+      menuItems: ["Teams", "Locations", "Life at SirJay", "How we hire", "Students", "Jobs"],
+      isLoggedIn: false,
     }
   }
 };
