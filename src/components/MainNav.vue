@@ -21,8 +21,8 @@
           </ul>
         </nav>
         <div class="flex items-center h-full ml-auto">
-          <profile-image v-if="isLoggedIn" data-test="login-button"/>
-          <action-button v-else data-test="profile-image"/>
+          <profile-image v-if="isLoggedIn" data-test="profile-image"/>
+          <action-button v-else data-test="login-button" @click="loginUser"/>
         </div>
       </div>
     </div>
@@ -45,6 +45,11 @@ export default {
       menuItems: ["Teams", "Locations", "Life at SirJay", "How we hire", "Students", "Jobs"],
       isLoggedIn: false,
     }
-  }
+  },
+  methods: {
+    loginUser() {
+      this.isLoggedIn = true;
+    }
+  },
 };
 </script>
