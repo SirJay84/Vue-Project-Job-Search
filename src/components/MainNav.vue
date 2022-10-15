@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full text-sm">
+  <header :class="['w-full', 'text-sm', headerHeightClass]">
     <div class="fixed top-0 left-0 w-full h-16 bg-white">
       <div 
         class="
@@ -22,9 +22,15 @@
         </nav>
         <div class="flex items-center h-full ml-auto">
           <profile-image v-if="isLoggedIn" data-test="profile-image"/>
-          <action-button v-else data-test="login-button" @click="loginUser"/>
+          <action-button 
+            v-else 
+            text="Sign in"
+            data-test="login-button" 
+            @click="loginUser"
+          />
         </div>
       </div>
+      <subnav v-if="isLoggedIn" data-test="subnav" />
     </div>
   </header>
 </template>
@@ -32,18 +38,30 @@
 <script>
 import ActionButton from "@/components/ActionButton.vue";
 import ProfileImage from "@/components/ProfileImage.vue";
+import Subnav from "@/components/Subnav.vue";
+
 export default {
   name: "MainNav",
   components: {
     ActionButton,
     ProfileImage,
+    Subnav,
   },
+  
   data() {
     return {
       company: "SirJay Careers",
       url:"https://careers.google.com",
       menuItems: ["Teams", "Locations", "Life at SirJay", "How we hire", "Students", "Jobs"],
       isLoggedIn: false,
+    }
+  },
+  computed: {
+    headerHeightClass() {
+      return {
+        "h-16":!this.isLoggedIn,
+        "h-32": this.isLoggedIn,
+      }
     }
   },
   methods: {
